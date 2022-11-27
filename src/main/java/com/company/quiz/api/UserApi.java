@@ -8,7 +8,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Api(tags = "User management API")
@@ -18,7 +17,8 @@ public interface UserApi {
     @ApiOperation("Get all users")
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
-    Page<UserDto> getAllUsers(@RequestParam("pageSize") int pageSize, @RequestParam("pageNumber") int pageNumber,
+    Page<UserDto> getAllUsers(@RequestParam("pageSize") int pageSize,
+                              @RequestParam("pageNumber") int pageNumber,
                               @RequestParam("sortType") String sortType);
 
     @ApiImplicitParams({
@@ -39,8 +39,8 @@ public interface UserApi {
     })
     @ApiOperation("Update user")
     @ResponseStatus(HttpStatus.OK)
-    @PutMapping(value = "/{id}")
-    UserDto updateUser(@PathVariable long id, @RequestBody UserDto userDto);
+    @PutMapping(value = "/{id}/{score}")
+    UserDto updateUser(@PathVariable("id") long id, @PathVariable("score") long score);
 
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", paramType = "path", required = true, value = "User id")

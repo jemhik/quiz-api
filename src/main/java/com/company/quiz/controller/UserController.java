@@ -21,7 +21,10 @@ public class UserController implements UserApi {
     @Override
     public Page<UserDto> getAllUsers(int pageSize, int pageNumber, String sortType) {
         log.info("UserController getAllUsers method");
-        return userService.listUsers(PageRequest.of(pageNumber, pageSize, Sort.by(Sort.DEFAULT_DIRECTION, sortType)));
+        return userService
+                .listUsers(PageRequest
+                        .of(pageNumber, pageSize, Sort
+                                .by(Sort.DEFAULT_DIRECTION, sortType).descending()));
     }
 
     @Override
@@ -35,11 +38,10 @@ public class UserController implements UserApi {
         log.info("UserController getUser with id " + userDto.getId());
         return userService.createUser(userDto);
     }
-
     @Override
-    public UserDto updateUser(long id, UserDto userDto) {
+    public UserDto updateUser(long id, long score) {
         log.info("UserController getUser with id " + id);
-        return userService.updateUser(id, userDto);
+        return userService.updateUser(id, score);
     }
 
     @Override
